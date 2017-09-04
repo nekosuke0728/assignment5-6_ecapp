@@ -1,0 +1,8 @@
+<h1>管理者アカウント一覧</h1>
+
+<% @admins.each do |admin| %>
+  <p>管理者ID：<%= admin.id %></p>
+  <p>名前：<%= admin.name %></p>
+  <p>権限：<%= admin.status_i18n %></p>
+  <p>メールアドレス：<%= admin.email %></p>
+<% end %>
