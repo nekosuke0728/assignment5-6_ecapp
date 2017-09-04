@@ -1,0 +1,8 @@
+<p><%= current_admin.name %>さんがログイン中</p>
+<br />
+
+<%= link_to "トップページ", admin_home_top_path %><br />
+<%= link_to "販売商品管理", products_path %><br />
+<%= link_to "管理者アカウント一覧", accounts_admin_index_path %><br />
+<%= link_to "ユーザーアカウント一覧", accounts_user_index_path %><br />
+<%= link_to "ログアウト", destroy_admin_session_path, method: :delete %><br />

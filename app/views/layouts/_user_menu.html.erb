@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+  <p><%= current_user.nickname %>さんがログイン中</p>
+<% end %>
+
+<br>
+
+<%= link_to "トップページ", user_home_top_path %><br>
+<%= link_to "商品一覧", products_path %><br>
+
+<% if user_signed_in? %>
+  <%#= link_to "マイページ", user_accounts_path(current_user) %><br>
+  <%= link_to "買い物かご", cart_path(current_user.id) %><br />
+  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %><br>
+<% else %>
+  <%= link_to "ユーザー登録", new_user_registration_path %><br />
+  <%= link_to "ログイン", new_user_session_path %><br />
+<% end %>
