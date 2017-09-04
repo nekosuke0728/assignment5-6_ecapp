@@ -1,0 +1,10 @@
+<%= form_for(product) do |f| %>
+  <p>商品名：<%= f.text_field :name %></p>
+  <p>商品カテゴリ：<%= f.select :category_id, Category.all.map{ |c| [c.name, c.id] }, include_blank: true %></p>
+  <p>価格：¥<%= f.text_field :price %></p>
+  <p>商品説明文：<%= f.text_field :description %></p>
+  <p>商品画像：<%= f.attachment_field :product_images_images, multiple: true %></p>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to '戻る', :back %> 

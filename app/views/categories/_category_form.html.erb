@@ -1,0 +1,6 @@
+<%= form_for(category) do |f| %>
+  <p>カテゴリ名：<%= f.text_field :name %></p>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to '戻る', :back %> 

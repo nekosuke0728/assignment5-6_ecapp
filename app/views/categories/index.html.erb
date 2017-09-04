@@ -1,0 +1,16 @@
+<h1>カテゴリ一覧</h1>
+
+<% if admin_signed_in? %>
+  <%= link_to "新規追加", new_category_path %>
+<% end %>
+
+<hr>
+
+<% @categories.each do |category| %>
+  <%= link_to category.name,"categories/#{category.id}" %>
+  <% if admin_signed_in? %>
+  <%= link_to "編集","categories/#{category.id}/edit" %>
+  <%= link_to "削除","categories/#{category.id}", method: :delete, data: { confirm: "削除してよろしいですか？" } %>
+  <% end %>
+  <br>
+<% end %>

@@ -24,4 +24,10 @@ Rails.application.routes.draw do
     get :user_index
   end
 
+  resources :categories
+
+  resources :products do
+    resources :product_images, only:[:create, :destroy, :update]
+  end
+
 end

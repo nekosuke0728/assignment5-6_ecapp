@@ -1,0 +1,30 @@
+<h1>商品一覧</h1>
+
+<% if admin_signed_in? %>
+  <%= link_to "新規追加", new_product_path %>
+<% end %>
+
+<hr>
+
+<% @products.each do |product| %>
+  <p>商品名：<%= link_to product.name,"products/#{product.id}" %></p>
+  <p>カテゴリ：<%= product.category.name %></p>
+  <p>価格：¥<%= product.price %></p>
+  <p>商品説明文：<%= product.description %></p>
+
+    <% if product.product_images.present? %>
+      <% product.product_images.each do |image| %>
+        <%= attachment_image_tag image, :image, :fill, 200, 200 %>
+      <% end -%>
+      <% else %>
+        <%= image_tag 'no_image.jpg', size: '200x200' %>
+    <% end %>
+
+  <br>
+
+  <% if admin_signed_in? %>
+    <%= link_to "編集","products/#{product.id}/edit" %>
+    <%= link_to "削除","products/#{product.id}", method: :delete, data: { confirm: "削除してよろしいですか？" } %>
+  <% end %>
+  <hr>
+<% end %>
