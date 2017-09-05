@@ -12,10 +12,10 @@
     <%= link_to "削除", cart_product_path(cart_product.id), method: :delete %>
     <hr>
   <% end %>
-  <% if @cart.nil? %>
+  <% unless @cart.nil? %>
     合計金額：¥<%= @total_price %>
     <br>
-    <%= link_to "注文", orders_path, method: :post %><br />
+    <%= link_to "注文", new_order_path %><br />
   <% end %>
 <% end %>
 

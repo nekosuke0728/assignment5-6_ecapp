@@ -1,6 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_admin!, only:[:index]
-  before_action :authenticate_user!, only:[:show, :create]
+  before_action :authenticate_user!, only:[:show, :create, :new]
+
+  def new
+    
+  end
 
   def create
     cart = Cart.find_by(user_id: current_user.id)
@@ -29,14 +33,11 @@ class OrdersController < ApplicationController
   end
 
   def index
-
+    @orders = order.all
   end
 
   def show
-    # @cart = Cart.find(params[:id])
-    # @order_products = OrderProduct.all
-    # @user = current_user.user
-    # @order = current_user.order
+    @orders = current_user.orders
   end
-  
+
 end
