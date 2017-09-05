@@ -2,10 +2,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  # Strong Parameters の設定（nicknameを許可）①
+  before_action :configure_permitted_parameters
+
+  # パンくずリスト
+  add_breadcrumb 'トップページ', :admin_home_top_path
+
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    add_breadcrumb 'ユーザーアカウント登録'
+    super
+  end
+
+  def account_update_params
+    devise_parameter_sanitizer.sanitize(:account_update)
+  end
 
   # POST /resource
   # def create
@@ -36,7 +47,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+
+  # Strong Parameters の設定（nicknameを許可）②
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:nickname])
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

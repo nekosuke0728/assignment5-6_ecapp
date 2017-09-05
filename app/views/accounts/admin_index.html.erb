@@ -1,5 +1,11 @@
 <h1>管理者アカウント一覧</h1>
 
+<% if current_admin.status_before_type_cast == 0 %>
+  <%= link_to "新規登録", new_admin_registration_path %><br />
+<% end %>
+
+<hr>
+
 <% @admins.each do |admin| %>
   <p>管理者ID：<%= admin.id %></p>
   <p>名前：<%= admin.name %></p>

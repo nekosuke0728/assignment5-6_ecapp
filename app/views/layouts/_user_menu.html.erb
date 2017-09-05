@@ -9,7 +9,8 @@
 
 <% if user_signed_in? %>
   <%#= link_to "マイページ", user_accounts_path(current_user) %><br>
-  <%= link_to "買い物かご", cart_path(current_user.id) %><br />
+  <%= link_to "買い物かご", cart_path(current_user.id) %><br>
+  <%#= link_to "購入履歴", cart_path(current_user.id) %><br>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %><br>
 <% else %>
   <%= link_to "ユーザー登録", new_user_registration_path %><br />
