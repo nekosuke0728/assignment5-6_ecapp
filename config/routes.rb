@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   resources :carts, only:[:show]
 
-  resources :cart_products, only:[:create, :destroy, :show]
+  resources :cart_products, only:[:create, :destroy]
   patch 'cart_products/:id/status_change', to: 'cart_products#status_change', as: :status_change
 
   resources :orders, only:[:index, :show, :new, :create]

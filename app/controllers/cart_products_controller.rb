@@ -23,11 +23,6 @@ class CartProductsController < ApplicationController
     redirect_to cart_path(current_user.id)
   end
 
-  def show
-    @cart = current_user.cart
-    @user = current_user
-  end
-
   def destroy
     @cart_product = CartProduct.find_by(id: params[:id])
     @cart_product.destroy
@@ -40,4 +35,9 @@ class CartProductsController < ApplicationController
     params.require(:cart_product).permit(:cart_id, :product_id, :count, :status)
   end
 
+  def order_params
+    params.require(:order).permit(:user_id, :total_price, :payment_method)
+  end
+
 end
+

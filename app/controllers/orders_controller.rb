@@ -3,7 +3,11 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only:[:show, :create, :new]
 
   def new
-    
+    @cart = current_user.cart
+    @user = current_user  
+    # @order = Order.new(order_params)
+    # @order.user_id = current_user.id
+    # @order.save    
   end
 
   def create
@@ -38,6 +42,12 @@ class OrdersController < ApplicationController
 
   def show
     @orders = current_user.orders
+  end
+
+  private
+
+  def order_params
+    params.require(:order).permit(:user_id, :total_price, :payment_method)
   end
 
 end
