@@ -2,7 +2,13 @@ class ProductsController < ApplicationController
   before_action :authenticate_admin!, only:[:new, :create, :edit, :update, :destroy]
 
   def index
-    @products = Product.all
+    @products = Product.page(params[:page]).per(50) 
+    if admin_signed_in?
+      add_breadcrumb 'トップページ', :admin_home_top_path
+    else
+      add_breadcrumb 'トップページ', :shop_top_path
+    end
+    add_breadcrumb '販売商品一覧', :products_path 
   end
 
   def show

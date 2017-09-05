@@ -11,7 +11,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters
 
   # パンくずリスト
-  add_breadcrumb 'トップページ', :admin_home_top_path
+  # add_breadcrumb 'トップページ', :admin_home_top_path
 
   # GET /resource/sign_up
   def new

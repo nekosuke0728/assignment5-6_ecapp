@@ -12,13 +12,16 @@
     <%= link_to "削除", cart_product_path(cart_product.id), method: :delete %>
     <hr>
   <% end %>
-  合計金額：¥<%= @total_price %>
+  <% if @cart.nil? %>
+    合計金額：¥<%= @total_price %>
+    <br>
+    <%= link_to "注文", orders_path, method: :post %><br />
+  <% end %>
 <% end %>
 
-<%#= link_to "注文", orders_path, method: :post %><br />
-
 <br>
 <br>
+<hr>
 
 <h2>後で買う</h2>
 

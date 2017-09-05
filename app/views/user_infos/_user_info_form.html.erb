@@ -1,0 +1,13 @@
+<%= form_for(user_info) do |f| %>
+  <p>苗字：<%= f.text_field :firstname %></p>
+  <p>名前：<%= f.text_field :lastname %></p>
+  <p>郵便番号：<%= f.text_field :zipcode %></p>
+  <p>都道府県：<%= f.select :prefecture, UserInfo.prefectures_i18n.invert, include_blank: true %></p>
+  <p>市区町村：<%= f.text_field :city %></p>
+  <p>番地：<%= f.text_field :block %></p>
+  <p>建物：<%= f.text_field :building %></p>
+  <p>電話番号：<%= f.text_field :phone %></p>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to '戻る', :back %> 

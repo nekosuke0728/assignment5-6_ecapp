@@ -1,0 +1,11 @@
+<h1>販売履歴</h1>
+
+<hr>
+
+<% @orders.each do |order| %>
+  <p>注文ID：<%= order.id %></p>
+  <p>注文者：<%= order.user_id %></p>
+  <p>合計金額：<%= order.total_price %></p>
+  <p>支払方法：<%= order.payment_method %></p>
+  <hr>
+<% end %>

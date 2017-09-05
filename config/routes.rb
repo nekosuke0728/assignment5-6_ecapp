@@ -13,9 +13,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  root 'user_home#top'
+  root 'shop#top'
 
-  get 'user_home/top'
+  get 'shop/top'
 
   get 'admin_home/top'
 
@@ -34,5 +34,9 @@ Rails.application.routes.draw do
 
   resources :cart_products, only:[:create, :destroy, :show]
   patch 'cart_products/:id/status_change', to: 'cart_products#status_change', as: :status_change
+
+  resources :orders, only:[:index, :show, :create]
+
+  resources :user_infos, only: [:show, :new, :create, :edit, :update]
 
 end
