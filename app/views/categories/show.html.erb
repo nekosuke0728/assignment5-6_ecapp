@@ -1,13 +1,10 @@
 <h1><%= @category.name %></h1>
 
-
 <br>
 
 <%= paginate @products %>
 
 <hr>
-
-
 
 <% @products.each do |product| %>
   商品名：<%= product.name %>

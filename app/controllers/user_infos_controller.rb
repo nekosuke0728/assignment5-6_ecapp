@@ -1,6 +1,8 @@
 class UserInfosController < ApplicationController
   before_action :authenticate_user!
 
+  add_breadcrumb 'トップページ', :shop_top_path
+
   def show
     @user = current_user
     if @user.user_info.nil?
@@ -8,11 +10,14 @@ class UserInfosController < ApplicationController
     else
       @user_info = current_user.user_info
     end
+    add_breadcrumb 'ユーザー詳細情報'
   end
 
   def new
     @user = current_user
     @user_info = UserInfo.new
+    add_breadcrumb 'ユーザー詳細情報', :user_info_path
+    add_breadcrumb '作成'
   end
 
   def create
@@ -28,6 +33,8 @@ class UserInfosController < ApplicationController
   def edit
     @user = current_user
     @user_info = current_user.user_info
+    add_breadcrumb 'ユーザー詳細情報', :user_info_path
+    add_breadcrumb '編集'
   end
 
   def update

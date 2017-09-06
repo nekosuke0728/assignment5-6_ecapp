@@ -1,25 +1,35 @@
 class ProductsController < ApplicationController
   before_action :authenticate_admin!, only:[:new, :create, :edit, :update, :destroy]
 
-  def index
-    @products = Product.page(params[:page]).per(50) 
+  def product_add_breadcrumb
     if admin_signed_in?
-      add_breadcrumb 'トップページ', :admin_home_top_path
       add_breadcrumb '販売商品管理一覧', :products_path
     else
-      add_breadcrumb 'トップページ', :shop_top_path
-      add_breadcrumb '販売商品一覧', :products_path
+      add_breadcrumb '商品一覧', :products_path
     end
+  end
+
+  def index
+    @products = Product.page(params[:page]).per(50) 
+    top_add_breadcrumb
+    product_add_breadcrumb
   end
 
   def show
     @product = Product.find_by(id: params[:id])
+    top_add_breadcrumb
+    product_add_breadcrumb
+    add_breadcrumb @product.category.name, :category_path
+    add_breadcrumb @product.name
   end
 
   def new
     @product = Product.new
     @product.product_images.build
     @product.build_category
+    top_add_breadcrumb
+    product_add_breadcrumb
+    add_breadcrumb '商品新規作成'
   end
 
   def create
@@ -28,11 +38,15 @@ class ProductsController < ApplicationController
       redirect_to products_path
     else
       render 'new'
-    end    
+    end
   end
 
   def edit
     @product = Product.find_by(id: params[:id])
+    top_add_breadcrumb
+    product_add_breadcrumb
+    add_breadcrumb @product.name, :product_path
+    add_breadcrumb '商品編集'
   end
 
   def update

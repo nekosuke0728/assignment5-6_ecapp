@@ -1,15 +1,13 @@
-<%= render_breadcrumbs %>
-
-<hr>
-
 <% if admin_signed_in? %>
   <h1>商品商品管理一覧</h1>
-  <%= link_to "新規追加", new_product_path %>
+  <p><%= link_to "新規作成", new_product_path %></p>
+  <p><%= link_to "カテゴリ管理", categories_path %><p>
 <% else %>   
-  <h1>商品商品一覧</h1>
+  <h1>商品一覧</h1>
+  <h3><%= link_to "カテゴリ別", categories_path %></h3>
 <% end %>
 
-<br>
+<hr>
 
 <%= paginate @products %>
 

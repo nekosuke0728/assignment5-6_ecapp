@@ -1,6 +1,8 @@
 class CartProductsController < ApplicationController
   before_action :authenticate_user!
 
+  add_breadcrumb 'トップページ', :shop_top_path
+
   def create
     unless user_signed_in?
       render new_user_registration_path
@@ -38,10 +40,6 @@ class CartProductsController < ApplicationController
   def cart_product_params
     params.require(:cart_product).permit(:cart_id, :product_id, :count, :status)
   end
-
-  # def order_params
-  #   params.require(:order).permit(:user_id, :total_price, :payment_method)
-  # end
 
 end
 

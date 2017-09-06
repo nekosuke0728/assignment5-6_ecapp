@@ -9,6 +9,10 @@ class OrdersController < ApplicationController
     @user = current_user
     @user_info = current_user.user_info
     @order = Order.new
+    add_breadcrumb 'トップページ', :shop_top_path
+    add_breadcrumb '商品一覧', :products_path
+    # add_breadcrumb '買い物カゴ', :cart_path
+    add_breadcrumb '注文確認'
   end
 
   def create
@@ -46,11 +50,15 @@ class OrdersController < ApplicationController
   # admin 販売履歴一覧
   def index
     @order = Order.all
+    add_breadcrumb 'トップページ', :admin_home_top_path
+    add_breadcrumb '販売履歴一覧'
   end
 
   # user 注文履歴一覧
   def show
     @order = current_user.orders
+    add_breadcrumb 'トップページ', :shop_top_path
+    add_breadcrumb '購入履歴一覧'
   end
 
   private

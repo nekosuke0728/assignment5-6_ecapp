@@ -3,13 +3,13 @@
   <head>
     <title>Assignment56Ecapp</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-
+    <!-- パンくず -->
+    <%= render_breadcrumbs %>
     <div class="menu">
       <% if admin_signed_in? %>
         <%= render "layouts/admin_menu" %>
@@ -17,7 +17,6 @@
         <%= render "layouts/user_menu" %>
       <% end %>
     </div>
-
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
