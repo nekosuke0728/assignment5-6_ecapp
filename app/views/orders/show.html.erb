@@ -1,14 +1,28 @@
 <h1>購入履歴</h1>
 
-<% if @order.blank? %>
+<% if @order.empty? %>
+
   <p>購入履歴はありません</p>
+
 <% else %>
+
   <% @order.each do |order| %>
     <p>注文日時：<%= order.created_at %></p>
     <p>注文ID：<%= order.id %></p>
-    <p>購入商品：<%= order.order_product.name %></p>
+    <p>購入商品：</p>
+      <ul>
+      <% order.order_products.each do |order_product| %>
+            <li><%= order_product.product.name %></li>
+            <li>¥<%= order_product.product.price %></li>
+            <li><%= order_product.count %>個</li>
+            <li>小計¥<%= order_product.sub_total %></li>
+            <hr>
+      <% end %>
+      </ul>
     <p>合計金額：<%= order.total_price %></p>
-    <p>支払方法：<%= order.payment_method %></p>
+    <p>支払方法：<%= order.payment_method_i18n %></p>
     <hr>
+
   <% end %>
+
 <% end %>

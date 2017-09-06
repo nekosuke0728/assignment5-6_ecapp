@@ -1,43 +1,46 @@
 <h1>注文確認画面</h1>
 <hr>
 
-<h2>購入予定商品</h2>
-<% total_price = 0 %>
-<% @cart.cart_products.where(status: true).each do |cart_product| %>
-  <% product = cart_product.product %>
-  <p>商品名：<%= product.name %></p>
-  <p>単価：<%= product.price %></p>
-  <p>数量：<%= cart_product.count %></p>
-  <p>小計：<%= cart_product.count * product.price %></p>
-<% total_price += cart_product.count * product.price %>
-<% end %>
-<p>合計金額：¥<%= total_price %></p>
-<hr>
+<% if @cart_products.empty? %>
 
-<h2>送付先情報</h2>
-<% if @user_info.blank? %>
-  <p>登録して</p>
+  <p>購入予定商品はありません</p>
+  
 <% else %>
-  <p>名前：<%= @user.firstname %><%= @user.lastname %></p>
-  <p>郵便番号<%= @user.zipcode %></p>
-  <p>住所：<%= @user.city %></p>
-  <p>電話番号：<%= @user.phone %></p>
-  <%= link_to "送付先情報の変更", edit_user_registration_path %><br />
+
+  <h2>購入予定商品</h2>
+  <% total_price = 0 %>
+  <% @cart.cart_products.where(status: true).each do |cart_product| %>
+    <% product = cart_product.product %>
+    <p>商品名：<%= product.name %></p>
+    <p>単価：<%= product.price %></p>
+    <p>数量：<%= cart_product.count %></p>
+    <p>小計：<%= cart_product.count * product.price %></p>
+  <% total_price += cart_product.count * product.price %>
+  <% end %>
+  <p>合計金額：¥<%= total_price %></p>
+  <hr>
+
+  <h2>送付先情報</h2>
+  <% if @user_info.blank? %>
+    <p>未登録です。登録してください。</p>
+    <%= link_to "送付先情報の登録", new_user_info_path %><br />
+  <% else %>
+    <p>名前：<%= @user_info.firstname %><%= @user_info.lastname %></p>
+    <p>郵便番号<%= @user_info.zipcode %></p>
+    <p>住所：<%= @user_info.city %></p>
+    <p>電話番号：<%= @user_info.phone %></p>
+    <%= link_to "送付先情報の変更", edit_user_info_path(current_user) %><br />
+  <% end %>
+
+  <hr>
+
+  <h2>支払方法</h2>
+    <%= form_for(@order, url: orders_path) do |f| %>
+      <%= f.hidden_field :user_id, value: @user.id %>
+      <%= f.hidden_field :total_price, value: total_price %>
+      <%= f.select :payment_method, Order.payment_methods_i18n.invert %>
+      <hr>
+      <%= f.submit '注文確定' %>
+    <% end %>
+
 <% end %>
-
-<hr>
-
-<h2>支払方法</h2>
-  <%#= form_for(@order, url: order_path) do |order| %>
-    <%#= order.hidden_field :user_id, value: @user.id %>
-    <%#= order.hidden_field :total_price, value: total_price %>
-    <%#= order.select :payment_method, Order.payment_methods_i18n.invert, include_blank: true %>
-  <%# end %>
-<!-- <%#= link_to "注文確定", orders_path, method: :post %><br /> -->
-
-<%#= form_for(@order, url: order_path) do |f| %>
-  <%# f.hidden_field :user_id, value: @user.id  %>
-  <%# f.hidden_field :total_price, value: total_price %>
-  <%#= f.select :payment_method, Order.payment_methods_i18n.invert %>
-  <%#= f.submit %>
-<%# end %>

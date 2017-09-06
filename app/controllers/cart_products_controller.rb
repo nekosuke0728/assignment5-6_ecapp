@@ -35,9 +35,9 @@ class CartProductsController < ApplicationController
     params.require(:cart_product).permit(:cart_id, :product_id, :count, :status)
   end
 
-  def order_params
-    params.require(:order).permit(:user_id, :total_price, :payment_method)
-  end
+  # def order_params
+  #   params.require(:order).permit(:user_id, :total_price, :payment_method)
+  # end
 
 end
 
