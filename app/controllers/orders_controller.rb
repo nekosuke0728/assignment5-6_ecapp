@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
 
   # admin 販売履歴一覧
   def index
-    @orders = order.all
+    @order = Order.all
   end
 
   # user 注文履歴一覧

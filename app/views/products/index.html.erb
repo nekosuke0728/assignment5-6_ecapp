@@ -2,15 +2,16 @@
 
 <hr>
 
-<%= paginate @products %>
-
-<hr>
-
-<h1>商品一覧</h1>
-
 <% if admin_signed_in? %>
+  <h1>商品商品管理一覧</h1>
   <%= link_to "新規追加", new_product_path %>
+<% else %>   
+  <h1>商品商品一覧</h1>
 <% end %>
+
+<br>
+
+<%= paginate @products %>
 
 <hr>
 

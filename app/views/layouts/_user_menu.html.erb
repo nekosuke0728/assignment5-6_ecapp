@@ -4,8 +4,9 @@
 
 <br>
 
-<%#= link_to "トップページ", shop_top_path %><br>
+<%= link_to "トップページ", shop_top_path %><br>
 <%= link_to "商品一覧", products_path %><br>
+<%= link_to "カテゴリ別", categories_path %><br>
 
 <% if user_signed_in? %>
   <%= link_to "買い物カゴ", cart_path(current_user.id) %><br>

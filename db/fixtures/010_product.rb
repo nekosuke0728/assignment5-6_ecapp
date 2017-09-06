@@ -3,7 +3,7 @@
     product.id = i + 1
     product.name = "#{ i + 1 }番目の商品"
     product.description = "#{ i + 1 }番目の商品説明文"
-    product.price = (i + 1) * 10
+    product.price = (i + 1) * 100
     product.category_id = rand(1..5)
   end
 end

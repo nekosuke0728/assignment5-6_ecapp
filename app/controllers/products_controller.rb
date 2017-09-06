@@ -5,10 +5,11 @@ class ProductsController < ApplicationController
     @products = Product.page(params[:page]).per(50) 
     if admin_signed_in?
       add_breadcrumb 'トップページ', :admin_home_top_path
+      add_breadcrumb '販売商品管理一覧', :products_path
     else
       add_breadcrumb 'トップページ', :shop_top_path
+      add_breadcrumb '販売商品一覧', :products_path
     end
-    add_breadcrumb '販売商品一覧', :products_path 
   end
 
   def show
@@ -23,8 +24,11 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @product.save
-    redirect_to products_path
+    if @product.save
+      redirect_to products_path
+    else
+      render 'new'
+    end    
   end
 
   def edit

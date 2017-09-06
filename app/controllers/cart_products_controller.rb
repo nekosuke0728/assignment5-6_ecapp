@@ -2,15 +2,19 @@ class CartProductsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    if current_user.cart.blank?
-      @cart = Cart.new
-      @cart.user_id = current_user.id
-      @cart.save
+    unless user_signed_in?
+      render new_user_registration_path
+    else
+      if current_user.cart.blank?
+        @cart = Cart.new
+        @cart.user_id = current_user.id
+        @cart.save
+      end
+      @cart_product = CartProduct.new(cart_product_params)
+      @cart_product.cart_id = current_user.id
+      @cart_product.save
+      redirect_to cart_path(current_user.id)
     end
-    @cart_product = CartProduct.new(cart_product_params)
-    @cart_product.cart_id = current_user.id
-    @cart_product.save
-    redirect_to cart_path(current_user.id)
   end
 
   def status_change

@@ -1,4 +1,11 @@
 <%= form_for(product) do |f| %>
+
+  <% @product.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger" role="alert">
+      <li><%= message %></li>
+    </div>
+  <% end %>
+
   <p>商品名：<%= f.text_field :name %></p>
   <p>商品カテゴリ：<%= f.select :category_id, Category.all.map{ |c| [c.name, c.id] }, include_blank: true %></p>
   <p>価格：¥<%= f.text_field :price %></p>

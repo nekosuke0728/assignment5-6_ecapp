@@ -1,8 +1,17 @@
-<h1>カテゴリ一覧</h1>
+<%= render_breadcrumbs %>
+
+<hr>
 
 <% if admin_signed_in? %>
+  <h1>カテゴリ管理</h1>
   <%= link_to "新規追加", new_category_path %>
+<% else %>
+  <h1>カテゴリ一別</h1>  
 <% end %>
+
+<br>
+
+<%= paginate @categories %>
 
 <hr>
 

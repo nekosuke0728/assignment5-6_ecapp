@@ -1,10 +1,19 @@
 <h1><%= @category.name %></h1>
 
-<% @category.products.each do |product| %>
+
+<br>
+
+<%= paginate @products %>
+
+<hr>
+
+
+
+<% @products.each do |product| %>
   商品名：<%= product.name %>
   <br>
   金額：<%= product.price %>
   <br>
-  <%= link_to "詳細","products/#{product.id}/show" %>
+  <%= link_to "詳細", product_path(product.id) %>
   <hr>
 <% end %>

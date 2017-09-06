@@ -2,10 +2,10 @@
 
 <hr>
 
-<% @orders.each do |order| %>
+<% @order.each do |order| %>
   <p>注文ID：<%= order.id %></p>
   <p>注文者：<%= order.user_id %></p>
   <p>合計金額：<%= order.total_price %></p>
-  <p>支払方法：<%= order.payment_method %></p>
+  <p>支払方法：<%= order.payment_method_i18n %></p>
   <hr>
 <% end %>
