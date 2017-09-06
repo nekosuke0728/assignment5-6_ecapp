@@ -37,6 +37,8 @@ class OrdersController < ApplicationController
       cart_product.destroy
     end
 
+    OrderMailer.confirmation_of_order(current_user,@order).deliver    
+
     redirect_to order_path(current_user)
 
   end

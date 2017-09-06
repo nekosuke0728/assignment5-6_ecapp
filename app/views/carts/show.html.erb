@@ -1,40 +1,44 @@
-<h1>買い物かご</h1>
+<h1>買い物カゴ</h1>
 
-<% unless @cart.blank? %>
-<% total_price = 0 %>
-  <% @cart.cart_products.where(status: true).each do |cart_product| %>
-    <% product = cart_product.product %>
-    <p>商品名：<%= product.name %></p>
-    <p>単価：¥<%= product.price %></p>
-    <p>数量：<%= cart_product.count %></p>
-    <p>小計：¥<%= sub_total = cart_product.count * product.price %></p>
-    <% total_price += sub_total %>
+<% if @cart_product.empty? %>
 
-    <%= link_to "後で買う", status_change_path(cart_product.id), method: :patch %>
-    <%= link_to "削除", cart_product_path(cart_product.id), method: :delete %>
-    <hr>
+  <p>買い物カゴは空です。</p>
+
+<% else %>
+
+  <% total_price = 0 %>
+    <% @cart.cart_products.where(status: true).each do |cart_product| %>
+      <% product = cart_product.product %>
+      <p>商品名：<%= product.name %></p>
+      <p>単価：¥<%= product.price %></p>
+      <p>数量：<%= cart_product.count %></p>
+      <p>小計：¥<%= sub_total = cart_product.count * product.price %></p>
+      <% total_price += sub_total %>
+
+      <%= link_to "後で買う", status_change_path(cart_product.id), method: :patch %>
+      <%= link_to "削除", cart_product_path(cart_product.id), method: :delete %>
+      <hr>
+    <% end %>
+    <% unless @cart.nil? %>
+      合計金額：¥<%= total_price %>
+      <br>
+      <%= link_to "注文", new_order_path %><br />
+    <% end %>
+
+  <hr>
+
+  <h2>後で買う</h2>
+
+  <% unless @cart.blank? %>
+    <% @cart.cart_products.where(status: false).each do |cart_product| %>
+      <% product = cart_product.product %>
+      <p>商品名：<%= product.name %></p>
+      <p>数量：<%= cart_product.count %></p>
+      <p>金額：<%= cart_product.count * product.price %></p>
+      <%= link_to "カートに戻す", status_change_path(cart_product.id), method: :patch %>
+      <%= link_to "削除", cart_product_path(cart_product.id), method: :delete %>
+      <hr>
+    <% end %>
   <% end %>
-  <% unless @cart.nil? %>
-    合計金額：¥<%= total_price %>
-    <br>
-    <%= link_to "注文", new_order_path %><br />
-  <% end %>
-<% end %>
 
-<br>
-<br>
-<hr>
-
-<h2>後で買う</h2>
-
-<% unless @cart.blank? %>
-  <% @cart.cart_products.where(status: false).each do |cart_product| %>
-    <% product = cart_product.product %>
-    <p>商品名：<%= product.name %></p>
-    <p>数量：<%= cart_product.count %></p>
-    <p>金額：<%= cart_product.count * product.price %></p>
-    <%= link_to "カートに戻す", status_change_path(cart_product.id), method: :patch %>
-    <%= link_to "削除", cart_product_path(cart_product.id), method: :delete %>
-    <hr>
-  <% end %>
 <% end %>

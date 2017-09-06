@@ -8,7 +8,7 @@
 <%= link_to "商品一覧", products_path %><br>
 
 <% if user_signed_in? %>
-  <%= link_to "買い物かご", cart_path(current_user.id) %><br>
+  <%= link_to "買い物カゴ", cart_path(current_user.id) %><br>
   <%= link_to "購入履歴", order_path(current_user.id) %><br>
   <%= link_to "ユーザー情報", user_info_path(current_user.id) %><br>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %><br>
