@@ -25,7 +25,8 @@ class UserInfosController < ApplicationController
     @user_info.user_id = @user.id
     if @user_info.save
        redirect_to user_info_path(@user.id), notice: '登録が完了しました'
-    # else
+    else
+       render 'new'
     end
   end
 

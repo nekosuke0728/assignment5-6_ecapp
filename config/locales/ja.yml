@@ -6,6 +6,16 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+
+    attributes:
+      user_info:
+        firstname: '性'
+        lastname: '名'
+        zipcode: '郵便番号'
+        prefecture: '都道府県'
+        city: '市区町村'
+        block: '番地'
+        phone: '電話番号'
   date:
     abbr_day_names:
     - 日
