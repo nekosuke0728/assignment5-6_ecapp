@@ -4,11 +4,11 @@ class CartsController < ApplicationController
   add_breadcrumb 'トップページ', :shop_top_path
 
   def show
-    if @cart_product.nil?
+    @cart = current_user.cart
+    if @cart.nil?
        @error = "買い物カゴは空です"
        render shop_top_path
-    else
-      @cart = current_user.cart
+    else      
       @cart_product = @cart.cart_products
       add_breadcrumb '商品一覧', :products_path
       add_breadcrumb '買い物カゴ'
