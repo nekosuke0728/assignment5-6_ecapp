@@ -41,7 +41,9 @@
       <%= f.hidden_field :total_price, value: total_price %>
       <%= f.select :payment_method, Order.payment_methods_i18n.invert %>
       <hr>
-      <% unless @user_info.blank? %>
+      <% if @user_info.blank? %>
+        <p>送付先住所が未入力となっているため注文確定ができません</p>
+      <% else %>
         <%= f.submit '注文確定' %>
       <% end %>
     <% end %>
