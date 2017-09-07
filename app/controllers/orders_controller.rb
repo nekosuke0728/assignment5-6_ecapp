@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
     @cart = current_user.cart
     @cart_products = CartProduct.where(cart_id: @cart.id, status: true)
     @user = current_user
-    @user_info = current_user.user_info
     @order = Order.new
     add_breadcrumb 'トップページ', :shop_top_path
     add_breadcrumb '商品一覧', :products_path
@@ -18,32 +17,38 @@ class OrdersController < ApplicationController
   def create
     @cart = current_user.cart
     @user = current_user
-    @user_info = current_user.user_info
     @order = Order.create(order_params)
-    @order.save
 
-    cart = Cart.find_by(user_id: current_user.id)
-    @cart_products = CartProduct.where(cart_id: cart.id, status: true)
+    unless @order.save
 
-    sub_total = 0
-    @cart_products.each do |cart_product|
+      render 'new'
 
-      product = Product.find(cart_product.product_id)
-      sub_total = (cart_product.count * product.price)
+    else
 
-      order_product = OrderProduct.create(
-        order_id: @order.id,
-        product_id: cart_product.product_id,
-        count: cart_product.count,
-        sub_total: sub_total
-      )
+      cart = Cart.find_by(user_id: current_user.id)
+      @cart_products = CartProduct.where(cart_id: cart.id, status: true)
 
-      cart_product.destroy
+      sub_total = 0
+      @cart_products.each do |cart_product|
+
+        product = Product.find(cart_product.product_id)
+        sub_total = (cart_product.count * product.price)
+
+        order_product = OrderProduct.create(
+          order_id: @order.id,
+          product_id: cart_product.product_id,
+          count: cart_product.count,
+          sub_total: sub_total
+        )
+
+        cart_product.destroy
+      end
+
+      OrderMailer.confirmation_of_order(current_user,@order).deliver    
+
+      redirect_to order_path(current_user)
+
     end
-
-    OrderMailer.confirmation_of_order(current_user,@order).deliver    
-
-    redirect_to order_path(current_user)
 
   end
 
@@ -64,7 +69,18 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:user_id, :total_price, :payment_method)
+    params.require(:order).permit(
+      :user_id,
+      :total_price,
+      :payment_method,
+      :firstname, 
+      :lastname,
+      :zipcode,
+      :prefecture,
+      :city,
+      :block,
+      :building,
+      :phone)
   end
 
 end

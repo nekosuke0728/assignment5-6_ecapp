@@ -5,7 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :cart
-  has_one :user_info, dependent: :destroy
   has_many :orders
 
   enum gender: { male: 0, female: 1, lgbt: 2, other: 3 }

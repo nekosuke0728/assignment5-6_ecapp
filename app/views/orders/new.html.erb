@@ -1,11 +1,11 @@
 <h1>注文確認画面</h1>
 <hr>
 
-<% if @cart_products.empty? %>
+<%# if @cart_products.empty? %>
 
-  <p>購入予定商品はありません</p>
+  <!-- <p>購入予定商品はありません</p> -->
   
-<% else %>
+<%# else %>
 
   <h2>購入予定商品</h2>
   <% total_price = 0 %>
@@ -20,32 +20,36 @@
   <p>合計金額：¥<%= total_price %></p>
   <hr>
 
-  <h2>送付先情報</h2>
+  <%= form_for(@order, url: orders_path) do |f| %>
 
-    <% if @user_info.blank? %>
-      <p>未登録です。登録してください。</p>
-      <%= link_to "送付先情報の登録", new_user_info_path %><br />
-    <% else %>
-      <p>名前：<%= @user_info.firstname %><%= @user_info.lastname %></p>
-      <p>郵便番号<%= @user_info.zipcode %></p>
-      <p>住所：<%= @user_info.city %></p>
-      <p>電話番号：<%= @user_info.phone %></p>
-      <%= link_to "送付先情報の変更", edit_user_info_path(current_user) %><br />
+    <% @order.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger" role="alert">
+        <li><%= message %></li>
+      </div>
     <% end %>
 
-  <hr>
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <%= f.hidden_field :total_price, value: total_price %>
 
-  <h2>支払方法</h2>
-    <%= form_for(@order, url: orders_path) do |f| %>
-      <%= f.hidden_field :user_id, value: @user.id %>
-      <%= f.hidden_field :total_price, value: total_price %>
-      <%= f.select :payment_method, Order.payment_methods_i18n.invert %>
-      <hr>
-      <% if @user_info.blank? %>
-        <p>送付先住所が未入力となっているため注文確定ができません</p>
-      <% else %>
-        <%= f.submit '注文確定' %>
-      <% end %>
-    <% end %>
+    <h2>送付先情報</h2>
+    <p>性：<%= f.text_field :firstname %></p>
+    <p>名：<%= f.text_field :lastname %></p>
+    <p>郵便番号：<%= f.text_field :zipcode %></p>
+    <p>都道府県：<%= f.select :prefecture, Order.prefectures_i18n.invert, include_blank: true %></p>
+    <p>市区町村：<%= f.text_field :city %></p>
+    <p>番地：<%= f.text_field :block %></p>
+    <p>建物：<%= f.text_field :building %></p>
+    <p>電話番号：<%= f.text_field :phone %></p>
 
-<% end %>
+    <hr>
+
+    <h2>支払方法</h2>
+    <%= f.select :payment_method, Order.payment_methods_i18n.invert %>
+
+    <hr>
+
+    <%= f.submit '注文確定' %>
+
+  <% end %>
+
+<%# end %>

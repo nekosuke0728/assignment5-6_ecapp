@@ -8,7 +8,7 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
 
     attributes:
-      user_info:
+      order:
         firstname: '性'
         lastname: '名'
         zipcode: '郵便番号'
