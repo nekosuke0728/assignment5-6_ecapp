@@ -16,8 +16,7 @@ class UserInfosController < ApplicationController
   def new
     @user = current_user
     @user_info = UserInfo.new
-    add_breadcrumb 'ユーザー詳細情報', :user_info_path
-    add_breadcrumb '作成'
+    add_breadcrumb 'ユーザー詳細情報作成'
   end
 
   def create

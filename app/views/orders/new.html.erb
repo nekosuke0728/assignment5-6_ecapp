@@ -21,16 +21,17 @@
   <hr>
 
   <h2>送付先情報</h2>
-  <% if @user_info.blank? %>
-    <p>未登録です。登録してください。</p>
-    <%= link_to "送付先情報の登録", new_user_info_path %><br />
-  <% else %>
-    <p>名前：<%= @user_info.firstname %><%= @user_info.lastname %></p>
-    <p>郵便番号<%= @user_info.zipcode %></p>
-    <p>住所：<%= @user_info.city %></p>
-    <p>電話番号：<%= @user_info.phone %></p>
-    <%= link_to "送付先情報の変更", edit_user_info_path(current_user) %><br />
-  <% end %>
+
+    <% if @user_info.blank? %>
+      <p>未登録です。登録してください。</p>
+      <%= link_to "送付先情報の登録", new_user_info_path %><br />
+    <% else %>
+      <p>名前：<%= @user_info.firstname %><%= @user_info.lastname %></p>
+      <p>郵便番号<%= @user_info.zipcode %></p>
+      <p>住所：<%= @user_info.city %></p>
+      <p>電話番号：<%= @user_info.phone %></p>
+      <%= link_to "送付先情報の変更", edit_user_info_path(current_user) %><br />
+    <% end %>
 
   <hr>
 
@@ -40,7 +41,9 @@
       <%= f.hidden_field :total_price, value: total_price %>
       <%= f.select :payment_method, Order.payment_methods_i18n.invert %>
       <hr>
-      <%= f.submit '注文確定' %>
+      <% unless @user_info.blank? %>
+        <%= f.submit '注文確定' %>
+      <% end %>
     <% end %>
 
 <% end %>

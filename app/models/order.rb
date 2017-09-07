@@ -5,4 +5,6 @@ class Order < ApplicationRecord
   
   enum payment_method: { transfer: 0, cod: 1, credit: 2, paypal: 3 }
 
+  validates :payment_method, presence: true
+
 end
