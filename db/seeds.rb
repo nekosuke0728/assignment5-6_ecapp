@@ -21,14 +21,3 @@ User.create(
   nickname: 'user1'
 )
 
-UserInfo.create(
-  user_id: 1,
-  firstname: 'user',
-  lastname: '1',
-  zipcode: '1111111',
-  prefecture: 1,
-  city: 'test2',
-  block: 'test3',
-  building: 'test4',
-  phone: '00000000000',
-)
