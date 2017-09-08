@@ -1,11 +1,11 @@
 <h1>注文確認画面</h1>
 <hr>
 
-<%# if @cart_products.empty? %>
+<% if @cart_products.empty? %>
 
-  <!-- <p>購入予定商品はありません</p> -->
+  <p>購入予定商品はありません</p>
   
-<%# else %>
+<% else %>
 
   <h2>購入予定商品</h2>
   <% total_price = 0 %>
@@ -52,4 +52,4 @@
 
   <% end %>
 
-<%# end %>
+<% end %>

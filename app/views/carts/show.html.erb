@@ -1,6 +1,10 @@
 <h1>買い物カゴ</h1>
 
-<% if @cart_product.empty? %>
+<% if @cart.nil? %>
+
+  <p>買い物カゴは空です。</p>
+
+<% elsif @cart_product.empty? %>
 
   <p>買い物カゴは空です。</p>
 
