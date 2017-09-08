@@ -18,10 +18,12 @@ class Order < ApplicationRecord
   validates :payment_method, presence: true
   validates :firstname, presence: true
   validates :lastname, presence: true
-  validates :zipcode, presence: true
+  # 郵便番号（ハイフンなし7桁）
+  validates :zipcode, presence: true, format: { with: /^\d{7}$/, multiline: true }
   validates :prefecture, presence: true
   validates :city, presence: true
   validates :block, presence: true
-  validates :phone, presence: true
+  # 携帯番号(ハイフンなし10桁or11桁)
+  validates :phone, presence: true, format: { with: /^\d{10}$|^\d{11}$/, multiline: true }
 
 end

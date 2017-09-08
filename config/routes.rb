@@ -37,6 +37,4 @@ Rails.application.routes.draw do
 
   resources :orders, only:[:index, :show, :new, :create]
 
-  resources :user_infos, only: [:show, :new, :create, :edit, :update]
-
 end

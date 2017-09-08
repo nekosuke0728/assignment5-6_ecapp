@@ -34,12 +34,12 @@
     <h2>送付先情報</h2>
     <p>性：<%= f.text_field :firstname %></p>
     <p>名：<%= f.text_field :lastname %></p>
-    <p>郵便番号：<%= f.text_field :zipcode %></p>
+    <p>郵便番号（ハイフンなし7桁）：<%= f.text_field :zipcode %></p>
     <p>都道府県：<%= f.select :prefecture, Order.prefectures_i18n.invert, include_blank: true %></p>
     <p>市区町村：<%= f.text_field :city %></p>
     <p>番地：<%= f.text_field :block %></p>
     <p>建物：<%= f.text_field :building %></p>
-    <p>電話番号：<%= f.text_field :phone %></p>
+    <p>電話番号（ハイフンなし10桁または11桁）：<%= f.text_field :phone %></p>
 
     <hr>
 
