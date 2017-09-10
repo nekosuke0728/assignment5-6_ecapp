@@ -28,10 +28,10 @@
 <hr>
 
 <h2>支払方法</h2>
-  <%#= form_for(@order, url: order_path) do |order| %>
-    <%#= order.hidden_field :user_id, value: @user.id %>
-    <%#= order.hidden_field :total_price, value: total_price %>
-    <%#= order.select :payment_method, Order.payment_methods_i18n.invert, include_blank: true %>
-  <%# end %>
+  <%= form_for(@order, url: order_path) do |order| %>
+    <%= order.hidden_field :user_id, value: @user.id %>
+    <%= order.hidden_field :total_price, value: total_price %>
+    <%= order.select :payment_method, Order.payment_methods_i18n.invert, include_blank: true %>
+  <% end %>
 
 <%= link_to "注文確定", orders_path, method: :post %><br />

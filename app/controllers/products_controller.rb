@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.page(params[:page]).per(50) 
+    @products = Product.page(params[:page]).per(50).order(created_at: :desc)
     top_add_breadcrumb
     product_add_breadcrumb
   end

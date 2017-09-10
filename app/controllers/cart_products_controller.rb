@@ -1,21 +1,28 @@
 class CartProductsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only:[:status_change, :destroy]
 
   add_breadcrumb 'トップページ', :shop_top_path
 
   def create
+
     unless user_signed_in?
-      render new_user_registration_path
+      redirect_to new_user_registration_path
+
     else
-      if current_user.cart.blank?
+      @user = current_user
+      @cart = current_user.cart
+
+      if @user.cart.nil?
         @cart = Cart.new
-        @cart.user_id = current_user.id
+        @cart.user_id = @user.id
         @cart.save
       end
+
       @cart_product = CartProduct.new(cart_product_params)
-      @cart_product.cart_id = current_user.id
+      @cart_product.cart_id = @cart.id
       @cart_product.save
       redirect_to cart_path(current_user.id)
+
     end
   end
 

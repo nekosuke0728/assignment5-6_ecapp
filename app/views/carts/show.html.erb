@@ -1,5 +1,7 @@
 <h1>買い物カゴ</h1>
 
+<hr>
+
 <% if @cart.nil? %>
 
   <p>買い物カゴは空です。</p>
@@ -26,7 +28,9 @@
     <% unless @cart.nil? %>
       合計金額：¥<%= total_price %>
       <br>
-      <%= link_to "注文", new_order_path %><br />
+      <% if total_price != 0 %>
+        <%= link_to "注文", new_order_path %><br />
+      <% end %>
     <% end %>
 
   <hr>

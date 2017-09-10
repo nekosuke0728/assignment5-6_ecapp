@@ -13,6 +13,12 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :category_id, presence: true
   validates :price, presence: true
+  validates :description, presence: true
 
+  # 商品新規登録時のエラーメッセージ重複を避ける
+  after_validation :remove_unnecessary_error_messages
+  def remove_unnecessary_error_messages
+    errors.messages.delete(:category_id)
+  end
 
 end

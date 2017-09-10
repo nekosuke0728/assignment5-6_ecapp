@@ -3,11 +3,9 @@ class CategoriesController < ApplicationController
 
   def category_add_breadcrumb
     if admin_signed_in?
-      add_breadcrumb '管理者トップページ', :admin_home_top_path
       add_breadcrumb '販売商品管理一覧', :products_path
       add_breadcrumb 'カテゴリ管理', :categories_path
     else
-      add_breadcrumb 'トップページ', :shop_top_path
       add_breadcrumb '商品一覧', :products_path
       add_breadcrumb 'カテゴリ別', :categories_path
     end    
@@ -15,6 +13,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.page(params[:page]).per(50)
+    top_add_breadcrumb
     category_add_breadcrumb
   end
 

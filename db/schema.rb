@@ -93,20 +93,6 @@ ActiveRecord::Schema.define(version: 20170907152136) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_infos", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "firstname", default: "", null: false
-    t.string "lastname", default: "", null: false
-    t.string "zipcode", default: "", null: false
-    t.integer "prefecture", null: false
-    t.string "city", default: "", null: false
-    t.string "block", default: "", null: false
-    t.string "building"
-    t.string "phone", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
